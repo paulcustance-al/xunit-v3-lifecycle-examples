@@ -21,7 +21,13 @@ public class DatabaseFixture : IDisposable
     {
         return _vegetables;
     }
-    
+
+    public async Task<string> GetFirstVegetable()
+    {
+        await Task.Delay(1000);
+        return _vegetables[0];
+    }
+
     public void AddVegetable(string vegetable)
     {
         _vegetables.Add(vegetable);

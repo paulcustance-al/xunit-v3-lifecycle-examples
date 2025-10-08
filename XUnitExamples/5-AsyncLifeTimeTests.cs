@@ -6,16 +6,24 @@
     https://xunit.net/docs/shared-context#constructor
  */
 
+using XUnitExamples.Fixtures;
+
 namespace XUnitExamples;
 
-public class AsyncLifetimeTests : IAsyncLifetime
+public class AsyncLifetimeTests : IAsyncLifetime, IClassFixture<DatabaseFixture>
 {
+    private readonly DatabaseFixture _fixture;
     private readonly Stack<int> _stack = new();
+
+    public AsyncLifetimeTests(DatabaseFixture fixture)
+    {
+        _fixture = fixture;
+    }
     
     public async ValueTask InitializeAsync()
     {
         // Simulate an async operation
-        await Task.CompletedTask;
+        var vegetable = await _fixture.GetFirstVegetable();
     }
     
     public ValueTask DisposeAsync()
