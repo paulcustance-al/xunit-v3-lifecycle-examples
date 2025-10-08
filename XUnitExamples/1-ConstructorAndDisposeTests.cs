@@ -21,7 +21,7 @@ public class ConstructorAndDisposeTests : IDisposable
 {
     private readonly BlockingCollection<int> _collection;
 
-    // A new instance ins created on every test using the constructor
+    // A new instance created on every test using the constructor
     public ConstructorAndDisposeTests()
     {
         _collection = new BlockingCollection<int>();
