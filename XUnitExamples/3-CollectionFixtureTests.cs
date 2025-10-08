@@ -15,10 +15,14 @@ using XUnitExamples.Fixtures;
 namespace XUnitExamples;
 
 [Collection("Database collection")]
+[Trait("Category", "TestsAcrossClasses")]
 public class CollectionFixtureTest1
 {
+    private readonly DatabaseFixture _fixture;
+
     public CollectionFixtureTest1(DatabaseFixture fixture)
     {
+        _fixture = fixture;
         Console.WriteLine("Hitting constructor...");
         Console.WriteLine(fixture.Logs);
     }
@@ -26,6 +30,7 @@ public class CollectionFixtureTest1
     [Fact]
     public void Test1()
     {
+        _fixture.AddVegetable("Tomato");
         Console.WriteLine("Running Test 1...");
         Assert.True(true);
     }
@@ -39,10 +44,14 @@ public class CollectionFixtureTest1
 }
 
 [Collection("Database collection")]
+[Trait("Category", "TestsAcrossClasses")]
 public class CollectionFixtureTest2
 {
+    private readonly DatabaseFixture _fixture;
+
     public CollectionFixtureTest2(DatabaseFixture fixture)
     {
+        _fixture = fixture;
         Console.WriteLine("Hitting constructor...");
         Console.WriteLine(fixture.Logs);
     }
@@ -50,6 +59,8 @@ public class CollectionFixtureTest2
     [Fact]
     public void Test1()
     {
+        var vegetables = _fixture.GetVegetables();
+        _fixture.AddVegetable("Cumquat");
         Console.WriteLine("Running Test 1...");
         Assert.True(true);
     }

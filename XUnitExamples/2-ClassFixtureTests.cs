@@ -15,15 +15,20 @@ namespace XUnitExamples;
 
 public class ClassFixtureTests : IClassFixture<DatabaseFixture>
 {
+    private readonly DatabaseFixture _fixture;
+
     public ClassFixtureTests(DatabaseFixture fixture)
     {
-        Console.WriteLine("Hitting constructor...");
+        _fixture = fixture;
+        Console.WriteLine("Hitting class constructor...");
         Console.WriteLine(fixture.Logs);
     }
     
     [Fact]
     public void Test1()
     {
+        var vegetables = _fixture.GetVegetables();
+        _fixture.AddVegetable("Suede");
         Console.WriteLine("Running Test 1...");
         Assert.True(true);
     }
@@ -31,6 +36,8 @@ public class ClassFixtureTests : IClassFixture<DatabaseFixture>
     [Fact]
     public void Test2()
     {
+        var vegetables = _fixture.GetVegetables();
+        _fixture.AddVegetable("Sweet Potato");
         Console.WriteLine("Running Test 2...");
         Assert.True(true);
     }

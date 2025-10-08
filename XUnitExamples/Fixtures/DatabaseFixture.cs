@@ -5,6 +5,8 @@ namespace XUnitExamples.Fixtures;
 public class DatabaseFixture : IDisposable
 {
     private readonly StringBuilder _sb = new();
+    private readonly List<string> _vegetables = ["Carrot", "Tomato", "Cucumber"];
+    
     public string Logs
     {
         get
@@ -13,6 +15,16 @@ public class DatabaseFixture : IDisposable
             _sb.Clear();
             return logs;
         }
+    }
+
+    public List<string> GetVegetables()
+    {
+        return _vegetables;
+    }
+    
+    public void AddVegetable(string vegetable)
+    {
+        _vegetables.Add(vegetable);
     }
 
     public DatabaseFixture()
